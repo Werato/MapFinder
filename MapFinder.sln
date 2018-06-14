@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapFinder", "MapFinder\MapFinder.csproj", "{D214A5B9-D3AF-4D28-8105-18FAD7327822}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{B2E25774-0C4E-4971-A23D-F3B57FDD67FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D214A5B9-D3AF-4D28-8105-18FAD7327822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D214A5B9-D3AF-4D28-8105-18FAD7327822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D214A5B9-D3AF-4D28-8105-18FAD7327822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D214A5B9-D3AF-4D28-8105-18FAD7327822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2E25774-0C4E-4971-A23D-F3B57FDD67FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2E25774-0C4E-4971-A23D-F3B57FDD67FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2E25774-0C4E-4971-A23D-F3B57FDD67FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2E25774-0C4E-4971-A23D-F3B57FDD67FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CA45431-B6CC-42DA-9425-909EF675C76D}
+	EndGlobalSection
+EndGlobal
