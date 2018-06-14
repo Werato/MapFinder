@@ -31,7 +31,7 @@
             }
         })
     }
-    console.log(11);
+
     function drawUsers(coord) {
         //TD:Change
         var iconStyle = new ol.style.Style({
@@ -108,13 +108,6 @@
     }
 
     //run
-    function delayUntileDefuneParam(param, handler) {
-        while (param != undefined) {
-        }
-        handler();
-    }
-
-
     function getLocation(hendler) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(hendler);
@@ -156,14 +149,12 @@
                 //v1
                 var i = 0;
                 var IntervalIds = setInterval(function () {
-                    if (sendData.lat != undefined && sendData.lon != undefined) {
+                    if (sendData.lat !== undefined && sendData.lon !== undefined) {
                         sendToController(sendData, "save");
                         clearInterval(IntervalIds);
                     }
-                    console.log(i++);
+
                 }, 1000);
-
-
             }
         });
 
