@@ -3,11 +3,15 @@
 @{
     ViewBag.Title = "CandyHook";
     Layout = "~/Views/Shared/_CustomMapLayout.cshtml";
+
+    Random rnd = new Random();
+    int q = rnd.Next(1, 1000);
+
 }
 @section Scripts
 {
     <script src="@Url.Content("~/Scripts/ol.js")"></script>
-    <script src="@Url.Content("~/Scripts/UsersScripts/mapController.js?v=3")"></script>
+    <script src="@Url.Content((String.Format("~/Scripts/UsersScripts/mapController.js?v={0}", q)))"></script>
     <script src="@Url.Content("~/Scripts/UsersScripts/pageController.js")"></script>
 }
 
