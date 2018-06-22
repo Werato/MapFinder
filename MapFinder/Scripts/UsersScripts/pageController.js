@@ -21,9 +21,7 @@
             data: { userData: JSON.stringify(pageData) },
             success: function (e) {
                 console.log(e);
-                drawUsers(e);
-
-
+                drawUsers(JSON.parse(e));
             },
             error: function (err) {
                 console.log(err);
@@ -122,6 +120,7 @@
         sendData.long = coor.coords.longitude;
         sendData.lat = coor.coords.latitude;
     }
+    console.log(112525);
     saveUser.click(
         function () {
 
@@ -147,7 +146,6 @@
                     sendData.lat = coor.coords.latitude;
                 });
                 //v1
-                var i = 0;
                 var IntervalIds = setInterval(function () {
                     if (sendData.lat !== undefined && sendData.lon !== undefined) {
                         sendToController(sendData, "save");

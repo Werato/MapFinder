@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @section Scripts
+    {
+        <script src="@Url.Content("~/Scripts/ol.js")"></script>
+        <script src="@Url.Content((String.Format("~/Scripts/UsersScripts/mapController.js?v={0}", q)))"></script>
+        <script src="@Url.Content("~/Scripts/UsersScripts/pageController.js")"></script>
+    }
+    <script src="@Url.Content("~/Module/File/View/Js/File.js")"></script>
+
+</head>
+<body>
+    <div>
+
+    </div>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
