@@ -10,7 +10,8 @@
         description: "",
         lon: undefined,
         lat: undefined,
-    }
+        files: []
+    };
     //hendlers
 
     function sendToController(pageData, method) {
@@ -21,7 +22,7 @@
             data: { userData: JSON.stringify(pageData) },
             success: function (e) {
                 console.log(e);
-                drawUsers(JSON.parse(e));
+                drawUsers(JSON.parse(e));//TODO: D
             },
             error: function (err) {
                 console.log(err);
@@ -120,7 +121,7 @@
         sendData.long = coor.coords.longitude;
         sendData.lat = coor.coords.latitude;
     }
-    console.log(112525);
+
     saveUser.click(
         function () {
 
@@ -155,5 +156,4 @@
                 }, 1000);
             }
         });
-
 })

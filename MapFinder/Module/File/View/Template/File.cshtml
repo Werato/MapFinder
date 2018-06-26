@@ -1,27 +1,55 @@
-﻿@{
-    Layout = null;
-}
+﻿<script src="~/Module/File/View/JS/File.js"></script>
+<link rel="stylesheet" href="~/Module/File/View/CSS/File.css?v=1">
 
-<!DOCTYPE html>
+<div class="UnloadImg"></div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-    @section Scripts
-    {
-        <script src="@Url.Content("~/Scripts/ol.js")"></script>
-        <script src="@Url.Content((String.Format("~/Scripts/UsersScripts/mapController.js?v={0}", q)))"></script>
-        <script src="@Url.Content("~/Scripts/UsersScripts/pageController.js")"></script>
-    }
-    <script src="@Url.Content("~/Module/File/View/Js/File.js")"></script>
-
-</head>
-<body>
-    <div>
-
+<form class="FileWrapper" action="/File/Edit" enctype="multipart/form-data" method="post" target="hiddenframe">
+    <div class="file">
+        <label class='filebutton'>
+            <span>
+                <input type='file' name='files'/>
+            </span>
+        </label>
     </div>
-    @RenderSection("scripts", required: false)
+    
+    @*<button onclick="file.add(this,'FileWrapper'); return false;" class="btn FileAdd"></button>*@
+</form>
+<script>
+    var maxPhoto = 5;
+    $(".filebutton input:file").on('change', function () {
 
-</body>
-</html>
+        if ($(".UnloadImg").length >= maxPhoto) {
+            alert("Max photo limit");
+            return;
+        }
+
+        $(".FileWrapper").submit();
+
+    });
+    function frameOnload(event){
+        file.multy(event);
+    }
+</script>
+<iframe id="hiddenframe" name="hiddenframe" style="display:none" onload="frameOnload(this)"></iframe>
+@*@using (  Html.BeginForm("Edit", "Home", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{
+
+
+    <div class="editor-label">Image</div>
+    <div class="editor-field">
+        <img width="150" height="150" />
+        <div>Upload new image: <input type="file" name="image" id="image" /></div>
+    </div>
+
+    <input type="submit" value="Save" />
+}*@
+@*<form >
+    <div class="editor-label">Image</div>
+    <div class="editor-field">
+        <img width="150" height="150">
+        <div>Upload new image: <input name="image" id="image" type="file"></div>
+    </div>
+    <input value="Save" type="submit">
+    <a href="/">Cancel and return to List</a>
+</form>*@

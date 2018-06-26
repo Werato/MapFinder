@@ -11,27 +11,23 @@
 @section Scripts
 {
     <script src="@Url.Content("~/Scripts/ol.js")"></script>
-    <script src="@Url.Content((String.Format("~/Scripts/UsersScripts/mapController.js?v={0}", q)))"></script>
+    <script src="@Url.Content(String.Format("~/Scripts/UsersScripts/mapController.js?v={0}",q))"></script>
     <script src="@Url.Content("~/Scripts/UsersScripts/pageController.js")"></script>
 }
 
 <div class="row-fluid">
     <div class="span12">
         <div id="map" class="map"></div>
-        <div id="msg">Click to add a point.</div>
-        <div id="info" style="display: none;"></div>
-        <label for="track">
-            track position
-            <input id="track" type="checkbox" />
-        </label>
-        <p>
-            @string.Format("{0:C2}", "Ящзф")
-            position accuracy : <code id="accuracy"></code>&nbsp;&nbsp;
-            altitude : <code id="altitude"></code>&nbsp;&nbsp;
-            altitude accuracy : <code id="altitudeAccuracy"></code>&nbsp;&nbsp;
-            heading : <code id="heading"></code>&nbsp;&nbsp;
-            speed : <code id="speed"></code>
-        </p>
+
+        <div id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content">
+
+
+
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -44,31 +40,64 @@
 
         <!-- Modal content-->
         <div class="modal-content">
+
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">New user</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3 ng-hide="newUser">New user</h3>
+            </div>
+
+
+            <ul class="nav nav-tabs" id="tabContent">
+                <li class="active"><a href="#details" data-toggle="tab">Personal info</a></li>
+                <li><a href="#photo-tab" data-toggle="tab">Photos</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="details" style="padding:15px">
+                    <label for="Name">Name:</label> <input name="Name" placeholder="Name" id="Name" type="text" class="form-control name" />
+                    <label for="Soname">Soname:</label> <input name="Soname" placeholder="Soname" id="Soname" type="text" class="form-control soname" />
+                    <label for="password">Password:</label> <input name="password" placeholder="password" id="password" type="password" class="form-control password" />
+                    <label for="Email">Email:</label> <input name="Email" placeholder="Email" id="Email" type="email" class="form-control email" />
+                    <label for="Phone">Phone:</label> <input name="Phone" placeholder="Phone" id="Phone" type="number" class="form-control phone" />
+                    <label for="Price">Price:</label> <input name="Price" placeholder="Price" id="Price" type="number" class="form-control price" />
+                    <label for="Description">Description:</label>
+                    <textarea name="Description" id="Description" class="form-control description" rows="5"></textarea>
+                </div>
+
+                <div class="tab-pane" id="photo-tab">
+                    <div style="padding:15px">
+                        @RenderPage("~/Module/File/View/Template/File.cshtml")
+                    </div>
+                </div>
 
             </div>
-            <div class="modal-body">
-                <label for="Name">Name:</label> <input name="Name" placeholder="Name" id="Name" type="text" class="form-control name" />
-                <label for="Soname">Soname:</label> <input name="Soname" placeholder="Soname" id="Soname" type="text" class="form-control soname" />
-                <label for="password">Password:</label> <input name="password" placeholder="password" id="password" type="password" class="form-control password" />
-                <label for="Email">Email:</label> <input name="Email" placeholder="Email" id="Email" type="email" class="form-control email" />
-                <label for="Phone">Phone:</label> <input name="Phone" placeholder="Phone" id="Phone" type="number" class="form-control phone" />
-                <label for="Price">Price:</label> <input name="Price" placeholder="Price" id="Price" type="number" class="form-control price" />
-                <label for="Description">Description:</label> 
-                <textarea name="Description" id="Description" class="form-control description" rows="5"></textarea>
 
-            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default js-save-user" style="float:left">Save</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+
         </div>
 
     </div>
 </div>
 
+
+@*@using (Html.BeginForm("Edit", "Home", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{
+
+    @Html.EditorForModel()
+
+    <div class="editor-label">Image</div>
+    <div class="editor-field">
+            <img width="150" height="150" />
+        <div>Upload new image: <input type="file" name="image" id="image" /></div>
+    </div>
+
+    <input type="submit" value="Save" />
+    @Html.ActionLink("Cancel and return to List", "Index")
+}*@
 
 @*@Ajax.ActionLink("Open popup", "InitUser", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "userPopUp", InsertionMode = InsertionMode.Replace, OnSuccess = "ShowUserValue" })<br />*@
 @*

@@ -23,46 +23,57 @@ namespace Database
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="LearnDB")]
-	public partial class UsersDataContext : System.Data.Linq.DataContext
+	public partial class ModelDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertPhoto(Photo instance);
+    partial void UpdatePhoto(Photo instance);
+    partial void DeletePhoto(Photo instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
     #endregion
 		
-		public UsersDataContext() : 
+		public ModelDataContext() : 
 				base(global::Database.Properties.Settings.Default.LearnDBConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public UsersDataContext(string connection) : 
+		public ModelDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public UsersDataContext(System.Data.IDbConnection connection) : 
+		public ModelDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public UsersDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public ModelDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public UsersDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public ModelDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
+		}
+		
+		public System.Data.Linq.Table<Photo> Photos
+		{
+			get
+			{
+				return this.GetTable<Photo>();
+			}
 		}
 		
 		public System.Data.Linq.Table<User> Users
@@ -70,6 +81,164 @@ namespace Database
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Photo")]
+	public partial class Photo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _PhotoId;
+		
+		private System.Data.Linq.Binary _FileData;
+		
+		private string _MnimeType;
+		
+		private string _ObjectName;
+		
+		private System.Nullable<int> _ObjectId;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPhotoIdChanging(int value);
+    partial void OnPhotoIdChanged();
+    partial void OnFileDataChanging(System.Data.Linq.Binary value);
+    partial void OnFileDataChanged();
+    partial void OnMnimeTypeChanging(string value);
+    partial void OnMnimeTypeChanged();
+    partial void OnObjectNameChanging(string value);
+    partial void OnObjectNameChanged();
+    partial void OnObjectIdChanging(System.Nullable<int> value);
+    partial void OnObjectIdChanged();
+    #endregion
+		
+		public Photo()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhotoId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int PhotoId
+		{
+			get
+			{
+				return this._PhotoId;
+			}
+			set
+			{
+				if ((this._PhotoId != value))
+				{
+					this.OnPhotoIdChanging(value);
+					this.SendPropertyChanging();
+					this._PhotoId = value;
+					this.SendPropertyChanged("PhotoId");
+					this.OnPhotoIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileData", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary FileData
+		{
+			get
+			{
+				return this._FileData;
+			}
+			set
+			{
+				if ((this._FileData != value))
+				{
+					this.OnFileDataChanging(value);
+					this.SendPropertyChanging();
+					this._FileData = value;
+					this.SendPropertyChanged("FileData");
+					this.OnFileDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MnimeType", DbType="VarChar(20)")]
+		public string MnimeType
+		{
+			get
+			{
+				return this._MnimeType;
+			}
+			set
+			{
+				if ((this._MnimeType != value))
+				{
+					this.OnMnimeTypeChanging(value);
+					this.SendPropertyChanging();
+					this._MnimeType = value;
+					this.SendPropertyChanged("MnimeType");
+					this.OnMnimeTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ObjectName", DbType="VarChar(50)")]
+		public string ObjectName
+		{
+			get
+			{
+				return this._ObjectName;
+			}
+			set
+			{
+				if ((this._ObjectName != value))
+				{
+					this.OnObjectNameChanging(value);
+					this.SendPropertyChanging();
+					this._ObjectName = value;
+					this.SendPropertyChanged("ObjectName");
+					this.OnObjectNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ObjectId", DbType="Int")]
+		public System.Nullable<int> ObjectId
+		{
+			get
+			{
+				return this._ObjectId;
+			}
+			set
+			{
+				if ((this._ObjectId != value))
+				{
+					this.OnObjectIdChanging(value);
+					this.SendPropertyChanging();
+					this._ObjectId = value;
+					this.SendPropertyChanged("ObjectId");
+					this.OnObjectIdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -151,7 +320,7 @@ namespace Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(15)")]
 		public string Name
 		{
 			get
@@ -171,7 +340,7 @@ namespace Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Soname", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Soname", DbType="VarChar(15)")]
 		public string Soname
 		{
 			get
@@ -191,7 +360,7 @@ namespace Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(30)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(12)")]
 		public string Phone
 		{
 			get
@@ -271,7 +440,7 @@ namespace Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(60)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(25)")]
 		public string Email
 		{
 			get

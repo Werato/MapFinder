@@ -148,9 +148,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Module\File\File.cs" />
     <Compile Include="Module\File\FileController.cs" />
-    <Compile Include="Module\File\Model\File.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +158,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Module\File\View\CSS\File.css" />
     <Content Include="Module\File\View\JS\File.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -212,6 +211,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="JSON\" />
     <Folder Include="Models\" />
+    <Folder Include="Module\File\Model\" />
     <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>
