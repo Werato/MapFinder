@@ -58,16 +58,19 @@ $(function () {
 
     //***************************************************************
 
-    var container = document.getElementById('popup');
-    var content = document.getElementById('popup-content');
-    var closer = document.getElementById('popup-closer');
+    //var container = document.getElementById('popup');
+    //var content = document.getElementById('popup-content');
+    //var closer = document.getElementById('popup-closer');
 
+    var container = $('#popup');
+    var content = $('#popup-content');
+    var closer = $('#popup-closer');
 
     /**
      * Create an overlay to anchor the popup to the map.
      */
     var popup = new ol.Overlay({
-        element: container,
+        element: container[0],
         autoPan: true,
         autoPanAnimation: {
             duration: 250
@@ -79,29 +82,43 @@ $(function () {
      * Add a click handler to hide the popup.
      * @return {boolean} Don't follow the href.
      */
-    closer.onclick = function () {
+    closer[0].onclick = function () {
         overlay.setPosition(undefined);
-        closer.blur();
+        closer[0].blur();
         return false;
     };
     map.addOverlay(popup);
 
     map.on('singleclick', function (evt) {
+        popup.setPosition(undefined);
         map.forEachFeatureAtPixel(evt.pixel,
             function (feature, layer) {
                 //скроллер + описание
                 //get photo
 
-                sendToController_v1("getUser", addScroller, feature.UserId);
-
-                content.innerHTML = '';
+                sendToController_v1("getUser", popUpStyle, feature.get("UserId"));
 
                 popup.setPosition(evt.coordinate);
             })
     });
     //***************************************************************
-    function addScroller(Some) {
-        console.log(Some);
+    function popUpStyle(model) {
+        console.log(model);
+        //head
+        //File / ShowImg ? strPhotoId = 6
+        for (var i in model)
+        {
+            content.find(".popup-slider")[0].innerHTML +=
+                "<div class='popUpMinSlider' style=\"background-image:url('File/ShowImg?strPhotoId=" + model[i].photoId + "')\"></div>";
+
+        }
+
+        content.find(".popup-userName")[0].innerHTML += "Name: " + model[0].userData.Name;
+        content.find(".popup-userSoname")[0].innerHTML += "Soname: " + model[0].userData.Soname;
+        content.find(".popup-userPhone")[0].innerHTML += "Phone: " + model[0].userData.Phone;
+        content.find(".popup-userPrice")[0].innerHTML += "Price: " + model[0].userData.Price;
+        content.find(".popup-userDescription")[0].innerHTML += "Description: " + model[0].userData.Description;
+
     }
 
     //map.on('pointerup', function (evt) { alert(11); })

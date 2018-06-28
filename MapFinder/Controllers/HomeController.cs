@@ -108,27 +108,25 @@ namespace MapFinder.Controllers
         }
 
         [HttpPost]
-        public JsonReader getUser(string Data)
+        public JsonResult getUser(string Data)
         {
             using (var db = new ModelDataContext())
             {
-                //TODO
-               var model = db.Users// your starting point - table in the "from" statement
-                .Join(db.Photos, // the source table of the inner join
-                    lu => lu.UserId,        // Select the primary key (the first part of the "on" clause in an sql "join" statement)
-                    lp => lp.ObjectId,   // Select the foreign key (the second part of the "on" clause)
-                    (lu, lp) => new { Users = lu, Photos = lp }) // selection
-                .Select(l => new
-                {
-                    l.Users,
-                    photoId = l.Photos.PhotoId,
-                    objName = l.Photos.ObjectName
-                })
-                .Where(l => l.Users.UserId == Convert.ToInt32(Data) && l.objName == "Users").ToList();    // where statement
+                var model = from photo in db.Photos
+                            join user in db.Users on photo.ObjectId equals user.UserId into tmp
+                            where photo.ObjectId == Convert.ToInt32(Data)
+                            from userData in tmp.DefaultIfEmpty() 
 
-                var pp = JsonConvert.SerializeObject(model);
-                return null;
+                            select new
+                            {
+                                userData,
+                                photoId = photo.PhotoId,
+                                objName = photo.ObjectName
+                                //Name = ed.EmpName,
+                                //Department = dpem.DeptName
+                            };
 
+                return Json(JsonConvert.SerializeObject(model));
             }
         }
 

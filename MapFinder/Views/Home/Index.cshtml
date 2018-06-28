@@ -15,6 +15,77 @@
     <script src="@Url.Content("~/Scripts/UsersScripts/pageController.js")"></script>
 }
 
+    <style>
+
+        .ol-popup {
+            position: absolute;
+            background-color: white;
+            -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            bottom: 12px;
+            left: -50px;
+            min-width: 280px;
+            background:red;
+            width:300px;
+            height:380px
+        }
+
+            .ol-popup:after, .ol-popup:before {
+                top: 100%;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+            }
+
+            .ol-popup:after {
+                border-top-color: white;
+                border-width: 10px;
+                left: 48px;
+                margin-left: -10px;
+            }
+
+            .ol-popup:before {
+                border-top-color: #cccccc;
+                border-width: 11px;
+                left: 48px;
+                margin-left: -11px;
+            }
+
+        .ol-popup-closer {
+            text-decoration: none;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+        }
+
+            .ol-popup-closer:after {
+                content: "✖";
+            }
+
+    .popup-slider {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+        .popup-slider > .popUpMinSlider {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+    </style>
+
+
 <div class="row-fluid">
     <div class="span12">
         <div id="map" class="map"></div>
@@ -22,8 +93,20 @@
         <div id="popup" class="ol-popup">
             <a href="#" id="popup-closer" class="ol-popup-closer"></a>
             <div id="popup-content">
-
-
+                <div class="popup-slider"></div>
+                <table class="popup-userInfo">
+                    <tr>
+                        <td class="popup-userName"></td>
+                        <td class="popup-userSoname"></td>
+                    </tr>
+                    <tr>
+                        <td class="popup-userPhone"></td>
+                        <td class="popup-userPrice"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="popup-userDescription"></td>
+                    </tr>
+                </table>
 
             </div>
         </div>
