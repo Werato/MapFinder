@@ -3,114 +3,18 @@
 @{
     ViewBag.Title = "CandyHook";
     Layout = "~/Views/Shared/_CustomMapLayout.cshtml";
-
-    Random rnd = new Random();
-    int q = rnd.Next(1, 1000);
-
 }
 @section Scripts
 {
     <script src="@Url.Content("~/Scripts/ol.js")"></script>
-    <script src="@Url.Content(String.Format("~/Scripts/UsersScripts/mapController.js?v={0}",q))"></script>
     <script src="@Url.Content("~/Scripts/UsersScripts/pageController.js")"></script>
 }
 
-    <style>
-
-        .ol-popup {
-            position: absolute;
-            background-color: white;
-            -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #cccccc;
-            bottom: 12px;
-            left: -50px;
-            min-width: 280px;
-            background:red;
-            width:300px;
-            height:380px
-        }
-
-            .ol-popup:after, .ol-popup:before {
-                top: 100%;
-                border: solid transparent;
-                content: " ";
-                height: 0;
-                width: 0;
-                position: absolute;
-                pointer-events: none;
-            }
-
-            .ol-popup:after {
-                border-top-color: white;
-                border-width: 10px;
-                left: 48px;
-                margin-left: -10px;
-            }
-
-            .ol-popup:before {
-                border-top-color: #cccccc;
-                border-width: 11px;
-                left: 48px;
-                margin-left: -11px;
-            }
-
-        .ol-popup-closer {
-            text-decoration: none;
-            position: absolute;
-            top: 2px;
-            right: 8px;
-        }
-
-            .ol-popup-closer:after {
-                content: "✖";
-            }
-
-    .popup-slider {
-        width: 100%;
-        height: 200px;
-        overflow: hidden;
-        position: relative;
-    }
-        .popup-slider > .popUpMinSlider {
-            width: 100%;
-            height: 100%;
-            display: inline-block;
-            position: absolute;
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
-
-    </style>
 
 
 <div class="row-fluid">
     <div class="span12">
-        <div id="map" class="map"></div>
-
-        <div id="popup" class="ol-popup">
-            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-            <div id="popup-content">
-                <div class="popup-slider"></div>
-                <table class="popup-userInfo">
-                    <tr>
-                        <td class="popup-userName"></td>
-                        <td class="popup-userSoname"></td>
-                    </tr>
-                    <tr>
-                        <td class="popup-userPhone"></td>
-                        <td class="popup-userPrice"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="popup-userDescription"></td>
-                    </tr>
-                </table>
-
-            </div>
-        </div>
-
+        @RenderPage("~/Module/Map/View/Template/map.cshtml")
     </div>
 </div>
 
@@ -159,76 +63,7 @@
                 <button type="button" class="btn btn-default js-save-user" style="float:left">Save</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-
         </div>
-
     </div>
 </div>
 
-
-@*@using (Html.BeginForm("Edit", "Home", FormMethod.Post,
-    new { enctype = "multipart/form-data" }))
-{
-
-    @Html.EditorForModel()
-
-    <div class="editor-label">Image</div>
-    <div class="editor-field">
-            <img width="150" height="150" />
-        <div>Upload new image: <input type="file" name="image" id="image" /></div>
-    </div>
-
-    <input type="submit" value="Save" />
-    @Html.ActionLink("Cancel and return to List", "Index")
-}*@
-
-@*@Ajax.ActionLink("Open popup", "InitUser", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "userPopUp", InsertionMode = InsertionMode.Replace, OnSuccess = "ShowUserValue" })<br />*@
-@*
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.@long)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.@long)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lat)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
-                </td>
-            </tr>
-        }
-
-    </table>
-*@

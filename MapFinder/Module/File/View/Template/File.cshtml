@@ -1,5 +1,5 @@
 ﻿<script src="~/Module/File/View/JS/File.js"></script>
-<link rel="stylesheet" href="~/Module/File/View/CSS/File.css?v=1">
+<link rel="stylesheet" href="~/Module/File/View/CSS/File.css">
 
 <div class="UnloadImg"></div>
 
@@ -31,25 +31,3 @@
     }
 </script>
 <iframe id="hiddenframe" name="hiddenframe" style="display:none" onload="frameOnload(this)"></iframe>
-@*@using (  Html.BeginForm("Edit", "Home", FormMethod.Post,
-    new { enctype = "multipart/form-data" }))
-{
-
-
-    <div class="editor-label">Image</div>
-    <div class="editor-field">
-        <img width="150" height="150" />
-        <div>Upload new image: <input type="file" name="image" id="image" /></div>
-    </div>
-
-    <input type="submit" value="Save" />
-}*@
-@*<form >
-    <div class="editor-label">Image</div>
-    <div class="editor-field">
-        <img width="150" height="150">
-        <div>Upload new image: <input name="image" id="image" type="file"></div>
-    </div>
-    <input value="Save" type="submit">
-    <a href="/">Cancel and return to List</a>
-</form>*@
