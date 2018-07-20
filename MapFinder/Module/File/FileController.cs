@@ -1,4 +1,5 @@
 ﻿using Database;
+using MapFinder.App_Code;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,11 @@ namespace MapFinder.Module.File
         {
             int PhotoId = 0;
 
-            if (Request.Files.Count > 0)
-                PhotoId = StoreFile(Request.Files[0]);
+            using(var db = new DbWorker())
+            {
+                if (Request.Files.Count > 0)
+                    PhotoId = db.StoreFile(Request.Files[0]);
+            }
 
             if(Session["PhotoId"] == null)
             {

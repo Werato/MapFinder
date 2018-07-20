@@ -136,7 +136,7 @@ $(function () {
             url: "Map/" + method,
             type: "POST",
             datatype: 'json',
-            data: { Data: JSON.stringify(param) },
+            data: { data: JSON.stringify(param) },
             success: function (e) {
                 console.log(e);
 

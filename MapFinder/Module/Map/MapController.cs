@@ -1,4 +1,5 @@
 ﻿using Database;
+using MapFinder.App_Code;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,24 +12,23 @@ namespace MapFinder.Module.Map
     public class MapController : Controller
     {
         [HttpPost]
-        public JsonResult GetUsers()
+        public string GetUsers()
         {
-            using (var db = new ModelDataContext())
+            using (var db = new DbWorker())
             {
-                return Json(getUsersCoordinteByRange(0));
+                return db.getUsersCoordinteByRange(0);
             }
         }
-        private string getUsersCoordinteByRange(float range)
+
+        [HttpPost]
+        public string getUser(string data)
         {
-            string userJsonCoord;
-
-            using (var db = new ModelDataContext())
+            using (var db = new DbWorker())
             {
-                var user = db.Users.Select(l => new { l.Lat, l.Lon, l.UserId }).ToList();
-                userJsonCoord = JsonConvert.SerializeObject(user);
-            }
+                string model = db.getModelByUserId(data);
 
-            return userJsonCoord;
+                return model;
+            }
         }
     }
 }

@@ -149,7 +149,7 @@
                 //v1
                 var IntervalIds = setInterval(function () {
                     if (sendData.lat !== undefined && sendData.lon !== undefined) {
-                        sendToController(sendData, "save");
+                        sendToController(sendData, "SaveUser");
                         clearInterval(IntervalIds);
                     }
 
