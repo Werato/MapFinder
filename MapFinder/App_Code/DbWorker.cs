@@ -12,7 +12,7 @@ namespace MapFinder.App_Code
     public class DbWorker : IDisposable
     {
 
-        public string getModelByUserId(string UserId)
+        public string getModel(string UserId)
         {
             using (var db = new ModelDataContext())
             {
@@ -31,6 +31,25 @@ namespace MapFinder.App_Code
             }
 
 
+        }
+
+        public string getModel()
+        {
+            using (var db = new ModelDataContext())
+            {
+                //by user Id Get photo
+                var model = from u in db.Users
+                            join p in db.Photos on u.UserId equals p.ObjectId into tmp
+                            where u.UserId == Convert.ToInt32(UserId)
+                            from photo in tmp.DefaultIfEmpty()
+                            select new
+                            {
+                                photo.PhotoId,
+                                userData = JsonConvert.SerializeObject(u)
+                            };
+
+                return JsonConvert.SerializeObject(model);//.ToString();
+            }
         }
 
         public string getUsersCoordinteByRange(float range)
@@ -95,6 +114,11 @@ namespace MapFinder.App_Code
                 //return Json(getUsersCoordinteByRange(0));
 
             }
+        }
+
+        public byte[] GetByts(int fileId)
+        {
+            return null;
         }
 
         private string CalculateMD5Hash(string input)

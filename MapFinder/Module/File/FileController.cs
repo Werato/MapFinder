@@ -16,16 +16,17 @@ namespace MapFinder.Module.File
         {
             int PhotoId = 0;
 
-            using(var db = new DbWorker())
+            using (var db = new DbWorker())
             {
                 if (Request.Files.Count > 0)
                     PhotoId = db.StoreFile(Request.Files[0]);
             }
 
-            if(Session["PhotoId"] == null)
+            if (Session["PhotoId"] == null)
             {
                 Session["PhotoId"] = new List<int>(PhotoId);
-            } else
+            }
+            else
             {
                 var PhotoIdList = Session["PhotoId"] as List<int>;
 
@@ -37,31 +38,6 @@ namespace MapFinder.Module.File
             }
 
             return String.Format("File/ShowImg?strPhotoId={0}", PhotoId);
-        }
-
-        private int StoreFile(HttpPostedFileBase file)
-        {
-            byte[] data = new byte[file.ContentLength];
-            file.InputStream.Read(data, 0, file.ContentLength);
-
-            using (var db = new ModelDataContext())
-            {
-                if(!file.ContentType.Contains("image"))
-                {
-                    return 0;
-                }
-
-                var photo = new Photo();
-
-                photo.FileData = data;
-                photo.MnimeType = file.ContentType;
-
-                db.Photos.InsertOnSubmit(photo);
-
-                db.SubmitChanges();
-
-                return photo.PhotoId;
-            }
         }
 
         [HttpGet]
@@ -78,7 +54,7 @@ namespace MapFinder.Module.File
                 Response.End();
 
                 return null;
-               
+
             }
         }
     }
