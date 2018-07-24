@@ -40,7 +40,6 @@ namespace MapFinder.App_Code
                 //by user Id Get photo
                 var model = from u in db.Users
                             join p in db.Photos on u.UserId equals p.ObjectId into tmp
-                            where u.UserId == Convert.ToInt32(UserId)
                             from photo in tmp.DefaultIfEmpty()
                             select new
                             {

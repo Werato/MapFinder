@@ -109,58 +109,5 @@
 
     </script>*@
 
-
-
-
-
-
 @*@Ajax.ActionLink("Open popup", "InitUser", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "userPopUp", InsertionMode = InsertionMode.Replace, OnSuccess = "ShowUserValue" })<br />*@
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.@long)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.@long)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
-            </td>
-        </tr>
-    }
-
-</table>
 
