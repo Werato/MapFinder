@@ -85,7 +85,7 @@ $(function () {
                 //скроллер + описание
                 //get photo
 
-                sendToController_v1("getUser", popUpStyle, feature.get("UserId"));
+                sendToController_v1("GetUser", popUpStyle, feature.get("UserId"));
 
                 popup.setPosition(evt.coordinate);
             })

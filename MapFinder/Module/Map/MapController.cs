@@ -21,7 +21,7 @@ namespace MapFinder.Module.Map
         }
 
         [HttpPost]
-        public string getUser(string data)
+        public string GetUser(string data)
         {
             using (var db = new DbWorker())
             {

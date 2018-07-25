@@ -1,5 +1,5 @@
 ﻿$(function () {
-    //init 
+
     var saveUser = $(".js-save-user");
     var sendData = {
         name: "",
@@ -12,7 +12,6 @@
         lat: undefined,
         files: []
     };
-    //hendlers
 
     function sendToController(pageData, method) {
         $.ajax({
@@ -22,7 +21,7 @@
             data: { userData: JSON.stringify(pageData) },
             success: function (e) {
                 console.log(e);
-                drawUsers(JSON.parse(e));//TODO: D
+                drawUsers(JSON.parse(e));//TODO: Use Map Controler MB: Create obj?
             },
             error: function (err) {
                 console.log(err);
@@ -67,20 +66,13 @@
             vectorSource.addFeature(featurething);
 
         }
-
-
-        //usersFeature.setStyle(iconStyle);
-        //vectorSource.addFeature(usersFeature);
-        //vectorSource.addFeatures(usersFeature);
-
     }
 
     function validUser(parentElemet) {
         var email = parentElemet.find(".email");
         var phone = parentElemet.find(".phone");
         var returnval = true;
-        var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-
+        var re = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/i;
         //email
         console.log(1);
         if (re.test(String(email.val()).toLowerCase())) {
@@ -92,7 +84,6 @@
         }
 
         //phone
-
         re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
         if (re.test(String(phone.val()).toLowerCase())) {
@@ -148,11 +139,18 @@
                 });
                 //v1
                 var IntervalIds = setInterval(function () {
-                    if (sendData.lat !== undefined && sendData.lon !== undefined) {
+                    var delay = 0;
+                    if (sendData.lat !== undefined && sendData.lon !== undefined)
+                    {
                         sendToController(sendData, "SaveUser");
                         clearInterval(IntervalIds);
                     }
-
+                    else if (delay == 60) //one minut
+                    { 
+                        alert("to long");
+                        clearInterval(IntervalIds);
+                    }
+                    delay++; 
                 }, 1000);
             }
         });

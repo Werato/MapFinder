@@ -63,7 +63,7 @@ namespace MapFinder.Controllers
 
                     Session["UserId"] = userId;
 
-                    linkFile2User(userId);
+                    LinkFile2User(userId);
 
                     return Json(db.getUsersCoordinteByRange(0));
                 }
@@ -77,7 +77,7 @@ namespace MapFinder.Controllers
         //refresh panel from cs
         //moved in mapController
         [HttpPost]
-        public JsonResult getUser(string userId)
+        public JsonResult GetUser(string userId)
         {
             using (var db = new DbWorker())
             {
@@ -89,7 +89,7 @@ namespace MapFinder.Controllers
 
     
 
-        private void linkFile2User(int UserId)
+        private void LinkFile2User(int UserId)
         {
             if (Session["PhotoId"] == null)
                 return;
