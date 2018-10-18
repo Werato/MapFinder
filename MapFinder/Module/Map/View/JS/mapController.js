@@ -21,7 +21,6 @@ $(function () {
             })
         }),
         points = [],
-        // 56.9246204 24.105487699999998
 
         createFeature = function (coord) {
             var feature = new ol.Feature({
@@ -72,7 +71,7 @@ $(function () {
     });
 
     closer[0].onclick = function () {
-        overlay.setPosition(undefined);
+        popup.setPosition(undefined);
         closer[0].blur();
         return false;
     };
@@ -85,7 +84,7 @@ $(function () {
                 //скроллер + описание
                 //get photo
 
-                sendToController_v1("GetUser", popUpStyle, feature.get("UserId"));
+                sendToController_v1("GetUser", popUpStyle);
 
                 popup.setPosition(evt.coordinate);
             })
@@ -112,7 +111,7 @@ $(function () {
 
     //map.on('pointerup', function (evt) { alert(11); })
     
-    function sendToController_v1(method, handler) {
+    function sendToController_v1(method, handler=null) {
         $.ajax({
             url: "Map/" + method,
             type: "POST",
@@ -120,28 +119,8 @@ $(function () {
             //data: { userData: JSON.stringify(pageData) },
             success: function (e) {
                 console.log(e);
-
-                handler(JSON.parse(e));
-
-            },
-            error: function (err) {
-                console.log(err);
-                alert(err);
-            }
-        })
-    }
-
-    function sendToController_v1(method, handler, param) {
-        $.ajax({
-            url: "Map/" + method,
-            type: "POST",
-            datatype: 'json',
-            data: { data: JSON.stringify(param) },
-            success: function (e) {
-                console.log(e);
-
-                handler(JSON.parse(e));
-
+                if (handler!=null)
+                    handler(JSON.parse(e));
             },
             error: function (err) {
                 console.log(err);
@@ -167,18 +146,6 @@ $(function () {
             zIndex: 1
 
         });
-
-        //vectorSource.clear();
-
-        //var thing = new ol.geom.Polygon([[
-        //    ol.proj.transform([-16, -22], 'EPSG:4326', 'EPSG:3857'),
-        //    ol.proj.transform([-44, -55], 'EPSG:4326', 'EPSG:3857')
-        //]]);
-        //var featurething = new ol.Feature({
-        //    name: "Thing",
-        //    geometry: thing
-        //});
-        //vectorSource.addFeature(featurething);
 
         for (var i in coord) {
 
